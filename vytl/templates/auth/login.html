@@ -5,10 +5,10 @@ VYTL : Login
 {% endblock head_title %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid p-5">
     <div class="card">
-        <div class="card-header">
-
+        <div class="card-header text-center">
+          <h1>Login</h1>
         </div>
         <div class="card-body">
             <form action="" method="POST">
@@ -16,6 +16,9 @@ VYTL : Login
                 {{form.as_p}}
                 <button class="btn btn-secondary" type="submit">Login</button>
             </form>
+        </div>
+        <div class="card-footer">
+          <a href="{% url 'sign-up' %}">New to VYTL? Sign Up for a new account</a>
         </div>
     </div>
 </div>
