@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block head_title %}
+VYTL Profile : {{request.user}}
+{% endblock head_title %}
+
 {% block content %}
 <div class="container-fluid d-flex">
     <div class="container">

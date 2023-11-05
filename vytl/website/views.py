@@ -9,6 +9,9 @@ from django.contrib.auth.views import LoginView
 def home_view(request):
     return render(request, 'pages/home.html', context = {}, status =200 )
 
+def schedule(request):
+    return render(request, 'pages/schedule.html', context = {}, status =200 )
+
 
 # Authentication pages
 class CustomLoginView(LoginView):
