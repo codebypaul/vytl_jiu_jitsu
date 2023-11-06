@@ -5,9 +5,9 @@ VYTL Profile : {{request.user}}
 {% endblock head_title %}
 
 {% block content %}
-<div class="container-fluid d-flex">
-    <div class="container">
-        <!-- User profile info -->
+<div class="row">
+    <div class="col-10">
+
         <div class="card text-center">
             <div class="card-header">
                 {{request.user}}
@@ -35,7 +35,6 @@ VYTL Profile : {{request.user}}
             </div>
         </div>
 
-        <!-- Info area -->
         <div class="card text-center">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
@@ -56,13 +55,12 @@ VYTL Profile : {{request.user}}
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
-    </div>
 
-    <!-- Sidebar -->
-    <div class="container">
+    </div>
+    <div class="col-2">
         <ul class="list-group list-group-flush">
             {% if user.is_superuser %}
-            <li class="list-group-item">
+            <li class="list-group-item text-center">
                 <a href="{% url 'admin panel' %}" class="btn btn-primary">Go to admin panel</a>
             </li>
             {% endif %}
@@ -71,6 +69,7 @@ VYTL Profile : {{request.user}}
             <li class="list-group-item">A fourth item</li>
             <li class="list-group-item">And a fifth one</li>
         </ul>
+
     </div>
 </div>
 {% endblock content %}

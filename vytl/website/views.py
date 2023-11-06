@@ -8,6 +8,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 # Create your views here.
 
 # General site pages
@@ -59,4 +60,6 @@ def profile(request):
 
 # Admin pages
 def admin_panel(request):
-    return render(request, 'user/admin_panel.html')
+    query_set=User.objects.all()
+
+    return render(request, 'user/admin_panel.html',{'users':query_set}, status = 200)

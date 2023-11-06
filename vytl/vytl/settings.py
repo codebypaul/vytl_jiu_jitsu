@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'api.apps.ApiConfig',
-    'website.apps.WebsiteConfig'
+    'website.apps.WebsiteConfig',
+    'customadmin.apps.CustomadminConfig'
 ]
 
 MIDDLEWARE = [
