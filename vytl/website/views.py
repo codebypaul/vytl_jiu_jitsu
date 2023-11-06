@@ -9,6 +9,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+
+# Pagination
+from django.core.paginator import Paginator
+
 # Create your views here.
 
 # General site pages
@@ -60,6 +64,29 @@ def profile(request):
 
 # Admin pages
 def admin_panel(request):
-    query_set=User.objects.all()
+    # User data
+    user_list=User.objects.all()
+    
+    user_p=Paginator(User.objects.all(),10)
+    user_page=request.GET.get('page')
+    users=user_p.get_page(user_page)
 
-    return render(request, 'user/admin_panel.html',{'users':query_set}, status = 200)
+    context={
+        'user_list':user_list,
+        'users': users,
+    }
+    return render(request, 'admin/admin_panel.html',context=context, status = 200)
+
+def admin_students(request):
+    # User data
+    user_list=User.objects.all()
+    
+    user_p=Paginator(User.objects.all(),10)
+    user_page=request.GET.get('page')
+    users=user_p.get_page(user_page)
+
+    context={
+        'user_list':user_list,
+        'users': users,
+    }
+    return render(request, 'admin/students/students_dashboard.html',context=context, status = 200)

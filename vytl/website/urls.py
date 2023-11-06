@@ -17,7 +17,9 @@ urlpatterns =  [
     path('logout/',LogoutView.as_view(next_page='home page'), name = 'logout'),
     # Authenticated user pages
     path('profile/',views.profile, name = 'profile'),
+    # Admin only, may need to move to separate app
     path('admin-panel/',views.admin_panel, name = 'admin panel'),
+    path('admin-students/',views.admin_students, name = 'admin students'),
 
 
 
