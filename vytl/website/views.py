@@ -62,31 +62,3 @@ class CustomLoginView(LoginView):
 def profile(request):
     return render(request, 'user/profile.html')
 
-# Admin pages
-def admin_panel(request):
-    # User data
-    user_list=User.objects.all()
-    
-    user_p=Paginator(User.objects.all(),10)
-    user_page=request.GET.get('page')
-    users=user_p.get_page(user_page)
-
-    context={
-        'user_list':user_list,
-        'users': users,
-    }
-    return render(request, 'admin/admin_panel.html',context=context, status = 200)
-
-def admin_students(request):
-    # User data
-    user_list=User.objects.all()
-    
-    user_p=Paginator(User.objects.all(),10)
-    user_page=request.GET.get('page')
-    users=user_p.get_page(user_page)
-
-    context={
-        'user_list':user_list,
-        'users': users,
-    }
-    return render(request, 'admin/students/students_dashboard.html',context=context, status = 200)
