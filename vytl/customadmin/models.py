@@ -24,9 +24,16 @@ def create_user_profile(sender,instance,created,**kwargs):
 def save_user_profile(sender,instance,**kwargs):
     instance.profile.save()
 
+
+class Badge(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE)
+    day_one=models.BooleanField(default=False)
+    investor=models.BooleanField(default=False)
+
 class Membership(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     date_paid = models.DateField()
-    
+    membership_paid=models.IntegerField(blank=True,null=True)
+
 
 
