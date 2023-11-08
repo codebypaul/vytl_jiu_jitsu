@@ -41,23 +41,32 @@ Profile | {{request.user}}
 
         <div class="card text-center">
             <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" href="#">Membership</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
+                <h3>Classes Attended : {{attendance.count}}</h3>
+
             </div>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Classes</th>
+                        <th scope="col">Topic Covered</th>
+                        <!-- <th scope="col">Handle</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for class in attendance %}
+                      <tr>
+                        <th scope="row">{{class.class_date}}</th>
+                        <td>{{class.class_info}}</td>
+                        <td></td>
+                        <!-- <td>@mdo</td> -->
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
             </div>
+            
         </div>
 
     </div>

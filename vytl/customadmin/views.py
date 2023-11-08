@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-
+# Models
 from django.contrib.auth.models import User
+from .models import Attend, Class
+# Authentication
 from django.contrib.auth import authenticate, login
+
 # Pagination
 from django.core.paginator import Paginator
 # Create your views here.
@@ -58,3 +61,11 @@ def admin_students(request):
         'users': users,
     }
     return render(request, 'admin/students/students_dashboard.html',context=context, status = 200)
+
+def attendance(request):
+    attendance_list=Attend.objects.all()
+    
+    context = {
+        'attendance_list':attendance_list,
+    }
+    return render(request,'admin/students/attendance.html',context=context,status=200)

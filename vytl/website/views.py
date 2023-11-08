@@ -10,6 +10,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 
+from customadmin.models import Attend
+
 # Pagination
 from django.core.paginator import Paginator
 
@@ -60,5 +62,10 @@ class CustomLoginView(LoginView):
     
 # Authenticated user pages
 def profile(request):
-    return render(request, 'user/profile.html')
+    user=request.user
+    attendance=Attend.objects.filter(student=user).order_by('class_date')
+    context={
+        'attendance':attendance,
+    }
+    return render(request, 'user/profile.html',context=context,status=200)
 
