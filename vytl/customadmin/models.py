@@ -30,6 +30,18 @@ class Badge(models.Model):
     day_one=models.BooleanField(default=False)
     investor=models.BooleanField(default=False)
 
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+    
+@receiver(post_save,sender=User)
+def create_user_badges(sender,instance,created,**kwargs):
+    if created:
+        Badge.objects.create(user=instance)
+
+@receiver(post_save,sender=User)
+def save_user_badges(sender,instance,**kwargs):
+    instance.badges.save()    
+
 class Membership(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     date_paid = models.DateField()
