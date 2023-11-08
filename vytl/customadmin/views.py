@@ -33,9 +33,9 @@ from django.core.paginator import Paginator
 # Admin only
 def admin_panel(request):
     # User data
-    user_list=User.objects.all()
+    user_list=User.objects.all().order_by('last_name')
     
-    user_p=Paginator(User.objects.all(),10)
+    user_p=Paginator(User.objects.all().order_by('last_name'),10)
     user_page=request.GET.get('page')
     users=user_p.get_page(user_page)
 
@@ -47,9 +47,9 @@ def admin_panel(request):
 
 def admin_students(request):
     # User data
-    user_list=User.objects.all()
+    user_list=User.objects.all().order_by('last_name')
     
-    user_p=Paginator(User.objects.all(),10)
+    user_p=Paginator(User.objects.all().order_by('last_name'),10)
     user_page=request.GET.get('page')
     users=user_p.get_page(user_page)
 

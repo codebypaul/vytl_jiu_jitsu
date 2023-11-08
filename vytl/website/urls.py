@@ -10,11 +10,12 @@ urlpatterns =  [
     path('about/',views.about, name = 'about'),
     path('instructors/',views.instructors, name = 'instructors'),
     path('pricing',views.pricing, name = 'pricing'),
-    # path('about/',views.about,name='about'),
+
     # Authentication
     path('sign-up/',RegisterPage.as_view(), name='sign-up'),
     path('login/',CustomLoginView.as_view(), name = 'login'),
     path('logout/',LogoutView.as_view(next_page='home page'), name = 'logout'),
+    
     # Authenticated user pages
     path('profile/',views.profile, name = 'profile'),
 

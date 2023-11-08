@@ -52,7 +52,15 @@ Admin | {{request.user}}
                 </button>
               </h2>
               <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">A fourth item</li>
+                        <li class="list-group-item">And a fifth one</li>
+                      </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -113,7 +121,10 @@ Admin | {{request.user}}
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Students</div>
+                    <div class="card-header d-flex justify-content-between">
+                        <h3>Students</h3>
+                        <p class="">Count : <b>{{user_list.count}}</b></p>
+                    </div>
                     <div class="card-body">
                         <table class="table table-bordered">
                             <thead>
@@ -129,7 +140,7 @@ Admin | {{request.user}}
                             <tbody>
                                 {% for user in users %}
                                 <tr>
-                                    <td>{{user.first_name}} {{user.last_name}}</td>
+                                    <td>{{user.last_name}}, {{user.first_name}}</td>
                                     <td>
                                         {{user.profile.belt}}
                                     </td>
