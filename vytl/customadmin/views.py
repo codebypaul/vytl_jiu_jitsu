@@ -63,9 +63,13 @@ def admin_students(request):
     return render(request, 'admin/students/students_dashboard.html',context=context, status = 200)
 
 def attendance(request):
-    attendance_list=Attend.objects.all()
-    
+
+    attendance_list=Attend.objects.all().order_by('class_date','class_info','student')
+
+    user_list=User.objects.all().order_by('last_name')
+
     context = {
         'attendance_list':attendance_list,
+        'user_list':user_list,
     }
     return render(request,'admin/students/attendance.html',context=context,status=200)
