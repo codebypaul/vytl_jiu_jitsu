@@ -18,9 +18,9 @@ Admin : Attendance
                             <table class="table">
                                 <thead>
                                   <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col"></th>
                                     <th scope="col">Handle</th>
                                   </tr>
                                 </thead>
@@ -29,7 +29,7 @@ Admin : Attendance
                                   <tr>
                                     <th scope="row">{{class.class_date}}</th>
                                     <td>{{class.student.first_name}} {{class.student.last_name}}</td>
-                                    <td>Otto</td>
+                                    <td>{{class.student.password}}</td>
                                     <td>@mdo</td>
                                   </tr>
                                   {% endfor %}
