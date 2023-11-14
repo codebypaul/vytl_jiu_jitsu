@@ -64,8 +64,14 @@ class CustomLoginView(LoginView):
 def profile(request):
     user=request.user
     attendance=Attend.objects.filter(student=user).order_by('class_date')
+
+    attend_p=Paginator(Attend.objects.filter(student=user),10)
+    attend_page=request.GET.get('page')
+    attends=attend_p.get_page(attend_page)
+    
     context={
         'attendance':attendance,
+        'attends':attends,
     }
     return render(request, 'user/profile.html',context=context,status=200)
 

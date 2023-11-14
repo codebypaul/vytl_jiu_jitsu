@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
+from datetime import date
 # Models
 from django.contrib.auth.models import User
-from .models import Attend, Class
+from .models import Attend, Class, Membership
 # Authentication
 from django.contrib.auth import authenticate, login
 
@@ -35,6 +36,8 @@ from django.core.paginator import Paginator
 
 # Admin only
 def admin_panel(request):
+    # Date
+    today_date=date.today()
     # User data
     user_list=User.objects.all().order_by('last_name')
     
@@ -42,9 +45,29 @@ def admin_panel(request):
     user_page=request.GET.get('page')
     users=user_p.get_page(user_page)
 
+    # Membership
+    memberships_year=Membership.objects.filter(date_paid__year=today_date.year)
+    memberships_month=Membership.objects.filter(date_paid__month=today_date.month)
+    # print(today_date.year)
+
+    current_month_member_income = 0
+    for x in memberships_month:
+        current_month_member_income += x.membership_paid
+    
+    year_member_income = 0
+    for x in memberships_year:
+        year_member_income += x.membership_paid
+
     context={
         'user_list':user_list,
         'users': users,
+        'date':today_date,
+        'month':today_date.strftime('%B'),
+        'year':today_date.strftime('%Y'),
+        'memberships_year':memberships_year,
+        'memberships_month':memberships_month,
+        'current_month_member_income':current_month_member_income,
+        'year_member_income':year_member_income
     }
     return render(request, 'admin/admin_panel.html',context=context, status = 200)
 
@@ -63,13 +86,22 @@ def admin_students(request):
     return render(request, 'admin/students/students_dashboard.html',context=context, status = 200)
 
 def attendance(request):
+    # search_input=request.GET.get('search-area') or ''
 
-    attendance_list=Attend.objects.all().order_by('class_date','class_info','student')
+    attendance_list=Attend.objects.values('class_date')
+    # .order_by('class_date','class_info','student')
 
     user_list=User.objects.all().order_by('last_name')
+
+    attend_p=Paginator(Attend.objects.all().order_by('class_date'),10)
+    attend_page=request.GET.get('page')
+    attends=attend_p.get_page(attend_page)
+
+    print(date.today().month)
 
     context = {
         'attendance_list':attendance_list,
         'user_list':user_list,
+        'attends':attends
     }
     return render(request,'admin/students/attendance.html',context=context,status=200)

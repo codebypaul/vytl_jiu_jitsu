@@ -43,9 +43,20 @@ def save_user_badges(sender,instance,**kwargs):
     instance.badge.save()    
 
 class Membership(models.Model):
+    member_choices = (
+        ('Adult Unlimited','Adult Unlimited'),
+        ('Kids Unlimited','Kids Unlimited')
+    )
+    member_costs=(
+        (130,130),
+        (100,100)
+    )
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     date_paid = models.DateField()
-    membership_paid=models.IntegerField(blank=True,null=True)
+    membership_paid=models.IntegerField(blank=True,null=True,choices=member_costs)
+
+    def __str__(self):
+        return f'{self.user} {self.date_paid}'
 
 class Class(models.Model):
     class_time = models.CharField(max_length=50)
@@ -65,4 +76,7 @@ class Attend(models.Model):
     student=models.ForeignKey(User,on_delete=models.CASCADE)
     class_info = models.ForeignKey(Class,on_delete=models.DO_NOTHING,blank=True,null=True)
     class_date = models.DateField(null=True,blank=True)
+
+    def __str__(self):
+        return f'{self.student} - {self.class_date} : {self.class_info}'
 

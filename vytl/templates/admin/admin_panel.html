@@ -69,7 +69,7 @@ Admin | {{request.user}}
     <!-- dashboard area -->
     <div class="col-10 p-3 flex-grow-1 border">
         <h1>Analytics Dashboard</h1>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col">
                 <div class="card">
                     <div class="card-header">
@@ -83,7 +83,7 @@ Admin | {{request.user}}
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col">
                 <div class="card"></div>
             </div>
@@ -95,25 +95,54 @@ Admin | {{request.user}}
                 </div>
             </div>
         </div>
-        <div class="row">
+
+        <div class="row mb-4">
             <div class="col">
                 <div class="card">
-                    sales last month
+                    <div class="card-header">
+                        <h5>Expenses : {{month}}</h5>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>
+                            Income : {{month}}
+                        </h5>
+                    </div>
+                    <div class="card-body text-end">
+                    
+                        $ {{ current_month_member_income|floatformat:2 }}
+                    </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card">
-                    sales income
+                    <div class="card-header text-center">
+                        <h5>
+                            Expenses YTD : {{year}}
+                        </h5>
+                    </div> 
+                    <div class="card-body">
+
+                    </div> 
                 </div>
             </div>
             <div class="col">
                 <div class="card">
-                    last month sales 
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    total revenue 
+                    <div class="card-header">
+                        <h5>
+                            Income YTD : {{year}}
+                        </h5>
+                    </div>
+                    <div class="card-body text-end">
+                        $ {{year_member_income|floatformat:2}}
+                    </div>
                 </div>
             </div>
         </div>

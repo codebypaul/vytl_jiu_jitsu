@@ -73,6 +73,12 @@ TEMPLATES = [
             ],
         },
     },
+    {
+        "BACKEND": "django_jinja.jinja2.Jinja2",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {}
+    },
 ]
 
 WSGI_APPLICATION = 'vytl.wsgi.application'
