@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from datetime import date
 # Models
 from django.contrib.auth.models import User
-from .models import Attend, Class, Membership
+from .models import Attend, Class, Membership, Expense
 # Authentication
 from django.contrib.auth import authenticate, login
 
@@ -48,7 +48,7 @@ def admin_panel(request):
     # Membership
     memberships_year=Membership.objects.filter(date_paid__year=today_date.year)
     memberships_month=Membership.objects.filter(date_paid__month=today_date.month)
-    # print(today_date.year)
+
 
     current_month_member_income = 0
     for x in memberships_month:
@@ -58,16 +58,36 @@ def admin_panel(request):
     for x in memberships_year:
         year_member_income += x.membership_paid
 
+    # Expenses
+    expenses_month = Expense.objects.filter(date_paid__month=today_date.month)
+    expenses_year = Expense.objects.filter(date_paid__year=today_date.year)
+
+    current_month_expenses = 0
+    for x in expenses_month:
+        current_month_expenses += x.cost
+
+    current_year_expenses = 0
+    for x in expenses_year:
+        current_year_expenses += x.cost
+
+    print(request.GET.get('student-quantity-filter'))
     context={
         'user_list':user_list,
         'users': users,
+
         'date':today_date,
         'month':today_date.strftime('%B'),
         'year':today_date.strftime('%Y'),
+
         'memberships_year':memberships_year,
         'memberships_month':memberships_month,
         'current_month_member_income':current_month_member_income,
-        'year_member_income':year_member_income
+        'year_member_income':year_member_income,
+
+        'expenses_month':expenses_month,
+        'expenses_year':expenses_year,
+        'current_month_expenses':current_month_expenses,
+        'current_year_expenses':current_year_expenses,
     }
     return render(request, 'admin/admin_panel.html',context=context, status = 200)
 

@@ -42,6 +42,7 @@ def create_user_badges(sender,instance,created,**kwargs):
 def save_user_badges(sender,instance,**kwargs):
     instance.badge.save()    
 
+# 
 class Membership(models.Model):
     member_choices = (
         ('Adult Unlimited','Adult Unlimited'),
@@ -57,6 +58,8 @@ class Membership(models.Model):
 
     def __str__(self):
         return f'{self.user} {self.date_paid}'
+
+# Class Models
 
 class Class(models.Model):
     class_time = models.CharField(max_length=50)
@@ -80,3 +83,16 @@ class Attend(models.Model):
     def __str__(self):
         return f'{self.student} - {self.class_date} : {self.class_info}'
 
+# Expenses
+class Expense(models.Model):
+    expense=models.CharField()
+    cost=models.FloatField()
+    date_paid=models.DateField()
+    paid_to=models.CharField(null=True,blank=True)
+    website=models.URLField(null=True,blank=True)
+
+    def __str__(self):
+        return f'{self.expense} | {self.date_paid}'
+    
+    class Meta:
+        ordering = ['date_paid','expense']
