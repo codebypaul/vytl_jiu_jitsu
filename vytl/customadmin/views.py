@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from datetime import date
 # Models
 from django.contrib.auth.models import User
-from .models import Attend, Class, Membership, Expense
+from .models import Attend, Class, Expense, MemberIncome
 # Authentication
 from django.contrib.auth import authenticate, login
 
@@ -46,17 +46,17 @@ def admin_panel(request):
     users=user_p.get_page(user_page)
 
     # Membership
-    memberships_year=Membership.objects.filter(date_paid__year=today_date.year)
-    memberships_month=Membership.objects.filter(date_paid__month=today_date.month)
+    memberships_year=MemberIncome.objects.filter(date_paid__year=today_date.year)
+    # memberships_month=Membership.objects.filter(date_paid__month=today_date.month)
 
 
     current_month_member_income = 0
-    for x in memberships_month:
-        current_month_member_income += x.membership_paid
+    # for x in memberships_month:
+    #     current_month_member_income += x.membership_paid
     
     year_member_income = 0
     for x in memberships_year:
-        year_member_income += x.membership_paid
+        year_member_income += x.user.profile.membership.price
 
     # Expenses
     expenses_month = Expense.objects.filter(date_paid__month=today_date.month)
@@ -80,7 +80,7 @@ def admin_panel(request):
         'year':today_date.strftime('%Y'),
 
         'memberships_year':memberships_year,
-        'memberships_month':memberships_month,
+        # 'memberships_month':memberships_month,
         'current_month_member_income':current_month_member_income,
         'year_member_income':year_member_income,
 
@@ -117,11 +117,26 @@ def attendance(request):
     attend_page=request.GET.get('page')
     attends=attend_p.get_page(attend_page)
 
-    print(date.today().month)
-
     context = {
         'attendance_list':attendance_list,
         'user_list':user_list,
         'attends':attends
     }
     return render(request,'admin/students/attendance.html',context=context,status=200)
+
+def memberships(request):
+    # Dates
+    today_date=date.today()
+
+    # Membership
+    member_income_p=Paginator(MemberIncome.objects.filter(date_paid__month=today_date.month),10)
+    member_income_page=request.GET.get('page')
+    memberships=member_income_p.get_page(member_income_page)
+
+    context={
+        # 
+        'today':today_date,
+        'month':today_date.strftime('%B'),
+        'memberships':memberships,
+    }
+    return render(request,'admin/students/memberships.html',context=context,status=200)

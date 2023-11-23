@@ -6,15 +6,30 @@ from django.dispatch import receiver
 
 
 # Create your models here.
+class Membership(models.Model):
+    title=models.CharField(null=True,blank=True)
+    start_date = models.DateField()
+    price=models.IntegerField(blank=True,null=True)
+
+
+    def __str__(self):
+        return f'{self.title}'
+
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     belt=models.CharField(default='White')
     phone_number=models.CharField(max_length=10,null=True,blank=True)
     birth_date=models.DateField(null=True,blank=True)
+    waiver_signed=models.BooleanField(null=True,blank=True)
+    waiver_link=models.URLField(null=True,blank=True)
+    membership=models.ForeignKey(Membership,on_delete=models.DO_NOTHING,null=True,blank=True)
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
     
+    class Meta:
+        ordering = ['user']
+
 @receiver(post_save,sender=User)
 def create_user_profile(sender,instance,created,**kwargs):
     if created:
@@ -42,24 +57,6 @@ def create_user_badges(sender,instance,created,**kwargs):
 def save_user_badges(sender,instance,**kwargs):
     instance.badge.save()    
 
-# 
-class Membership(models.Model):
-    member_choices = (
-        ('Adult Unlimited','Adult Unlimited'),
-        ('Kids Unlimited','Kids Unlimited')
-    )
-    member_costs=(
-        (130,130),
-        (100,100)
-    )
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    date_paid = models.DateField()
-    membership_paid=models.IntegerField(blank=True,null=True,choices=member_costs)
-
-    def __str__(self):
-        return f'{self.user} {self.date_paid}'
-
-# Class Models
 
 class Class(models.Model):
     class_time = models.CharField(max_length=50)
@@ -82,6 +79,14 @@ class Attend(models.Model):
 
     def __str__(self):
         return f'{self.student} - {self.class_date} : {self.class_info}'
+
+# Income
+class MemberIncome(models.Model):
+    user=models.ForeignKey(User,on_delete=models.DO_NOTHING)
+    date_paid=models.DateField()
+
+    def __str__(self):
+        return f'{self.date_paid} {self.user.first_name} {self.user.last_name} - {self.user.profile.membership}'
 
 # Expenses
 class Expense(models.Model):
