@@ -10,10 +10,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 
+# Models
 from customadmin.models import Attend
 
 # Pagination
 from django.core.paginator import Paginator
+
+# Misc
+from datetime import date
 
 # Create your views here.
 
@@ -68,10 +72,12 @@ def profile(request):
     attend_p=Paginator(Attend.objects.filter(student=user),10)
     attend_page=request.GET.get('page')
     attends=attend_p.get_page(attend_page)
+    today=date.today().strftime("%m/%d")
     
     context={
         'attendance':attendance,
         'attends':attends,
+        'today':today,
     }
     return render(request, 'user/profile.html',context=context,status=200)
 

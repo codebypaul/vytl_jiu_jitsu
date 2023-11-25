@@ -141,22 +141,31 @@ Admin | {{request.user}}
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">Name
-
-                                    </th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">First Name</th>
                                     <th scope="col">Belt</th>
+                                    <th scope="col">Age</th>
                                     <th scope="col">DOB</th>
+                                    <th scope="col">Waiver Signed</th>
                                     <th scope="col">Start Date</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for user in users %}
                                 <tr>
-                                    <td>{{user.last_name}}, {{user.first_name}}</td>
+                                    <td>{{user.last_name}}</td>
+                                    <td>{{user.first_name}}</td>
                                     <td>
                                         {{user.profile.belt}}
                                     </td>
+                                    <td></td>
                                     <td>{{user.profile.birth_date}}</td>
+                                    {% if user.profile.waiver_signed %}
+                                    <td class="bg-success text-white">Signed</td>
+                                    {% else %}
+                                    <td class="bg-danger text-white">No Waiver</td>
+                                    {% endif %}
+
                                     <td>{{user.date_joined}}</td>
                                 </tr>
                                 {% endfor %}

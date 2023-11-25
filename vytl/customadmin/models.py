@@ -25,10 +25,10 @@ class Profile(models.Model):
     membership=models.ForeignKey(Membership,on_delete=models.DO_NOTHING,null=True,blank=True)
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return f'{self.user.last_name}, {self.user.first_name}'
     
     class Meta:
-        ordering = ['user']
+        ordering = ['user__last_name']
 
 @receiver(post_save,sender=User)
 def create_user_profile(sender,instance,created,**kwargs):

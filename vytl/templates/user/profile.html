@@ -10,7 +10,11 @@ Profile | {{request.user}}
 
         <div class="card text-center">
             <div class="card-header">
+                {% if today == user.profile.birth_date %}
+                <h5>Happy Birthday! {{user.first_name}} {{user.last_name}}</h5>
+                {% else %}
                 <h5>{{request.user}}</h5>
+                {% endif %}
             </div>
             <div class="row g-0">
                 <div class="col-md-4">
@@ -25,7 +29,13 @@ Profile | {{request.user}}
                             {% endif %}
                         </div>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{user.profile.birth_date}}</li>
+                            <li class="list-group-item">{{today}}</li>
+                            <li class="list-group-item">A third item</li>
+                            <li class="list-group-item">A fourth item</li>
+                            <li class="list-group-item">And a fifth one</li>
+                          </ul>
                     </div>
                 </div>
             </div>
