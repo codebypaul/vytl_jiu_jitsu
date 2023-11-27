@@ -5,36 +5,44 @@ Jiu Jitsu
 {% endblock head_title %}
 
 {% block content %}
-<div class="row" >
-    <div class="col" id="banner">
-        <img id="banner-img" src="/media/images/empty_gym.jpg" alt="">
+<div class="row" id="banner-row">
+    <div class="col" id="banner" >
+      <img id="banner-img" src="/media/images/empty_gym.jpg" alt="">
     </div>
 </div>
 <div class="row">
-    <div class="col">
+    <div class="col-8 p-5">
         <div>
-            <h2>Welcome to VYTL Jiu Jitsu!</h2>
-            <p></p>
+            <h2>Welcome to VYTL Jiu Jitsu!</h2><br>
+            <p>
+              At VYTL Jiu Jitsu, we're more than just a martial arts school; we're a tight-knit community. We believe in the power of jiu jitsu to transform lives and bring people together. Our academy is a place where you can escape the hustle and bustle of your daily routine, clear your mind, and immerse yourself in a supportive, like-minded group.
+            </p>
+            <p>
+              Community is at the heart of everything we do. We're a family of diverse individuals brought together by our shared passion for jiu jitsu. Whether you're a seasoned practitioner or just starting your journey, you'll find a welcoming and inclusive atmosphere here. We're not just teammates; we're friends who support each other on and off the mats.
+            </p>
+            <p>
+              Our commitment to jiu jitsu technique and skill development is unwavering. We provide expert instruction and a nurturing environment for our students to learn, grow, and excel. It's not just about the moves; it's about mastering the art and building your self-confidence with every class.
+            </p>
+            <p>
+              VYTL Jiu Jitsu is your escape from the daily grind. It's a place where you can free your mind, relieve stress, and discover your inner strength. While you're working hard to perfect your technique, you'll also find personal growth, discipline, and a renewed sense of determination.
+            </p>
         </div>
     </div>
-</div>
-<div class="row" id="home_photo_row">
-  <div id="photo_row">
-    <!-- <img src="/media/images/zach_kesa.jpg" alt="..." > -->
-  </div>
-
-    <div id="photo_row">
-      <!-- <img src="/media/images/paul_w_mount.jpg" alt="..." > -->
-    </div>
-
-    <div id="photo_row">
+    <div class="col-4">
       
     </div>
 </div>
 
-<div class="row">
-    <div class="col">
-        Banner/Full Width Image
-    </div>
+<div class="row" id="home_photo_row">
+  <div class="col-4">
+    <img src="/media/images/zach_kesa.jpg" id="image" alt="">
+  </div>
+  <div class="col-4" >
+    <img src="/media/images/group_photo.jpg" id="image" alt="">
+  </div>
+  <div class="col-4" >
+    <img src="/media/images/paul_w_mount.jpg" id="image" alt="">
+  </div>
+  
 </div>
 {% endblock content %}
