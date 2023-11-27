@@ -22,7 +22,9 @@ Admin | {{request.user}}
                                     <th scope="col">Last Name</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Belt</th>
-                                    <th scope="col">Age</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Email</th>
+                                    <!-- <th scope="col">Age</th> -->
                                     <th scope="col">Membership</th>
                                 </tr>
                             </thead>
@@ -32,7 +34,9 @@ Admin | {{request.user}}
                                     <td>{{user.last_name}}</td>
                                     <td>{{user.first_name}}</td>
                                     <td>{{user.profile.belt}}</td>
-                                    <td>Otto</td>
+                                    <!-- <td>Otto</td> -->
+                                    <td>{{user.profile.phone_number}}</td>
+                                    <td>{{user.email}}</td>
                                     <td>{{user.profile.membership.title}}</td>
                                 </tr>
                                 {% endfor %}
